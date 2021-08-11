@@ -1,0 +1,6 @@
+.idea
+database_init/
+database/
+db.sqlite3
+__pycache__
+.DS_Store
