@@ -4,7 +4,7 @@
 
   </div>
   <div class="flex justify-center items-center min-h-screen w-screen flex-row p-2 xl:p-10">
-    <SlotMachine ref="slot-machine"></SlotMachine>
+    <SlotMachine :slots="getSlots()"></SlotMachine>
   </div>
   <footer v-if="true" class="fixed bottom-0 my-2 w-full block flex justify-center">
     <a href="https://github.com/KiOui/squatofadt" class="underline opacity-80 mx-auto text-black">Check the source code on GitHub</a>
@@ -17,6 +17,8 @@ import Bubbles from "@/components/Bubbles.vue";
 import SlotMachine from "@/components/SlotMachine.vue";
 import ExerciseApiService from "@/common/exercise.api.service";
 import shuffle from "@/util/shuffle";
+import Exercise from "@/models/exercise.model";
+import Player from "@/models/player.model";
 
 @Options({
   name: "Index",
@@ -54,6 +56,26 @@ import shuffle from "@/util/shuffle";
     }
   },
   methods: {
+    getSlots() {
+      return [
+        {
+          title: "Player",
+          items: this.players.map((player: Player) => {
+            return player.name;
+          })
+        },
+        {
+          title: "Exercise",
+          items: this.exercises.map((exercise: Exercise) => {
+            return exercise.name;
+          })
+        },
+        {
+          title: "Reps",
+          items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        }
+      ]
+    },
     start(event: Event) {
       if (this.games.length > 0) {
         this.nextGame();
